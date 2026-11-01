@@ -51,6 +51,16 @@ svg.i{width:2.6rem;height:2.6rem;fill:none;stroke:currentColor;stroke-width:2;st
 .ag button{background:none;border:0;color:#fff;font-size:1.3rem;display:flex;flex-direction:column;align-items:center;gap:0.6rem}
 .ag b{width:5.6rem;height:5.6rem;border-radius:1.6rem;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:var(--acc)}
 #toast{position:absolute;left:50%;bottom:7.6rem;transform:translateX(-50%);background:#000c;padding:0.8rem 1.8rem;border-radius:1.8rem;font-size:1.4rem;opacity:0;transition:opacity .3s;pointer-events:none}
+
+/* compatibilidad WebView antiguo: sin flex-gap */
+button,button:focus,*:focus{outline:none!important}
+.pill span+span{margin-left:1.4rem}
+.row>*+*{margin-left:1.4rem}
+.ctl>*+*{margin-left:1.6rem}
+.cp>*+*{margin-top:1rem}
+.radio>*+*{margin-top:.8rem}
+#wd{font-size:1.8rem}
+.wx .t{font-size:5.4rem}
 </style></head>
 <body>
 <div id="stage">
