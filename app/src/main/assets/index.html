@@ -64,7 +64,7 @@ svg.i{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;stroke
     <div class="pill"><span id="wmax">↑ --°</span><span id="wmin">↓ --°</span><span id="whum">--%</span><span id="wwind">-- km/h</span></div>
    </div>
   </div>
-  <div class="card clock"><div class="h" id="clk">--:--</div><div class="d" id="dt"></div>
+  <div class="card clock"><div class="h" id="clk" onclick="cycleZoom()">--:--</div><div class="d" id="dt"></div>
    <div class="pill" id="oil" onclick="setOil()">Aceite: faltan 5.000 km</div></div>
   <div class="card radio" onclick="go('radio')">
    <svg class="i" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8l10-5"/><circle cx="9" cy="14" r="2.5"/><path d="M15 12h3M15 16h3"/></svg>
