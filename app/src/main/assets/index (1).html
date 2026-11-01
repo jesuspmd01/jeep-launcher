@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--bg:#04173a;--bg2:#062a5e;--card:#0a4a94;--card2:#052a66;--line:#1d6fd0;--mute:#9fc2f0;--acc:#2f9bff;--pill:rgba(255,255,255,.13)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent;user-select:none}
+html{font-size:10px}html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);font-family:Roboto,sans-serif;color:#fff}
+#stage{position:absolute;left:0;top:0;right:0;bottom:0;background:linear-gradient(160deg,var(--bg2),var(--bg))}
+body.night #stage{filter:brightness(.55) saturate(.8)}
+svg.i{width:2.6rem;height:2.6rem;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.grid{position:absolute;left:1.4rem;right:1.4rem;top:1.4rem;bottom:7rem;display:grid;grid-template-columns:1.12fr 1fr 1fr;grid-template-rows:1fr 1.15fr;gap:1rem}
+.card{border:1px solid var(--line);border-radius:1.8rem;background:linear-gradient(180deg,var(--card),var(--card2));padding:1.4rem;position:relative;overflow:hidden}
+.hero{grid-row:1/3}
+.hero h1{font-size:2.8rem;font-weight:700}
+.hero p{color:var(--mute);font-size:1.5rem;margin-top:0.2rem}
+.brand{position:absolute;right:1.6rem;top:1.4rem;font:italic 700 3rem Roboto,sans-serif;color:#e5e9ee;letter-spacing:-1}
+.car{position:absolute;left:50%;transform:translateX(-50%);top:9.2rem;width:34rem;-webkit-mask-image:radial-gradient(ellipse at center,#000 62%,transparent 98%)}
+.wx{position:absolute;left:1.4rem;right:1.4rem;bottom:1.4rem}
+.row{display:flex;align-items:center;gap:1.2rem}
+.wx .t{font-size:5rem;font-weight:300}
+.wx small{display:block;color:var(--mute);font-size:1.2rem;margin-top:0.2rem}
+.pill{display:inline-flex;gap:1.2rem;background:var(--pill);border-radius:2rem;padding:0.6rem 1.3rem;font-size:1.3rem;margin-top:0.8rem}
+.clock{text-align:center;background:linear-gradient(180deg,#073a80,#052a66)}
+.clock .h{font-size:5rem;font-weight:700;color:var(--acc);line-height:1.1}
+.clock .d{font-size:1.4rem;color:#cfe3ff;margin:0.2rem 0 0.6rem}
+.radio{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#051f66;color:var(--acc);gap:0.6rem}
+.radio .big{font-size:5rem;font-weight:700}
+.radio .sub{font-size:1.4rem;color:var(--mute)}
+.radio svg.i{width:4rem;height:4rem}
+.bt{text-align:center}
+.tag{position:absolute;left:1.4rem;top:1.2rem;background:rgba(0,30,80,.55);border-radius:1.4rem;padding:0.4rem 1.2rem;font-size:1.1rem;font-weight:700}
+.bt .ic{color:#7fb4ec;margin-top:2rem}.bt .ic svg{width:5.6rem;height:5.6rem}
+.bt .s{font-size:1.9rem;font-weight:700;margin-top:0.6rem}
+.bt .a{font-size:1.3rem;color:#cfe3ff}
+.ctl{display:flex;justify-content:center;align-items:center;gap:1.4rem;margin-top:1.2rem}
+.ctl button{width:4.4rem;height:4.4rem;border-radius:50%;border:0;background:rgba(0,30,80,.55);color:#fff;display:flex;align-items:center;justify-content:center}
+.ctl button.p{width:5.8rem;height:5.8rem;background:#fff;color:#04173a}
+.ctl svg{width:2rem;height:2rem;fill:currentColor;stroke:none}
+.cp{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;font-size:1.8rem;font-weight:500}
+.cp .logo{width:5.6rem;height:5.6rem;border-radius:1.3rem;background:#fff;color:#0a4a94;display:flex;align-items:center;justify-content:center}
+.cp .logo svg{width:3rem;height:3rem;fill:currentColor;stroke:none}
+.bar{position:absolute;left:0;right:0;bottom:0;height:6.2rem;display:flex;justify-content:space-around;align-items:center}
+.bar button{background:none;border:0;color:var(--acc);width:7rem;height:5.4rem;display:flex;align-items:center;justify-content:center}
+.bar svg.i{width:3rem;height:3rem}
+.bar .home i{display:block;width:4.6rem;height:4.6rem;border-radius:50%;border:0.3rem solid var(--acc);box-shadow:0 0 1.4rem var(--acc)}
+#apps{position:absolute;inset:0;background:rgba(2,12,34,.97);display:none;padding:1.6rem;overflow-y:auto}
+#apps.on{display:block}
+#apps .top{display:flex;justify-content:space-between;font-size:2rem;font-weight:700;margin-bottom:1.2rem}
+#apps .top button{background:var(--pill);border:0;color:#fff;border-radius:2rem;padding:0.6rem 2rem;font-size:1.6rem}
+.ag{display:grid;grid-template-columns:repeat(6,1fr);gap:1.2rem}
+.ag button{background:none;border:0;color:#fff;font-size:1.3rem;display:flex;flex-direction:column;align-items:center;gap:0.6rem}
+.ag b{width:5.6rem;height:5.6rem;border-radius:1.6rem;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:2.4rem;color:var(--acc)}
+#toast{position:absolute;left:50%;bottom:7.6rem;transform:translateX(-50%);background:#000c;padding:0.8rem 1.8rem;border-radius:1.8rem;font-size:1.4rem;opacity:0;transition:opacity .3s;pointer-events:none}
+
+/* compatibilidad WebView antiguo: sin flex-gap */
+button,button:focus,*:focus{outline:none!important}
+.pill span+span{margin-left:1.4rem}
+.row>*+*{margin-left:1.4rem}
+.ctl>*+*{margin-left:1.6rem}
+.cp>*+*{margin-top:1rem}
+.radio>*+*{margin-top:.8rem}
+#wd{font-size:1.8rem}
+.wx .t{font-size:5.4rem}
+</style></head>
+<body>
+<div id="stage">
+ <div class="grid">
+  <div class="card hero">
+   <h1 id="hi">Hola, Jesus</h1><p id="hi2">Bienvenido</p><div class="brand">Jeep</div>
+   <img class="car" src="jeep.jpg" alt="Jeep">
+   <div class="wx">
+    <div class="row"><span id="wi"></span><span class="t" id="wt">--°</span>
+     <div><b id="wd">Maracaibo, Zulia</b><small id="ws">Cargando clima…</small></div></div>
+    <div class="pill"><span id="wmax">↑ --°</span><span id="wmin">↓ --°</span><span id="whum">--%</span><span id="wwind">-- km/h</span></div>
+   </div>
+  </div>
+  <div class="card clock"><div class="h" id="clk" onclick="cycleZoom()">--:--</div><div class="d" id="dt"></div>
+   <div class="pill" id="oil" onclick="setOil()">Aceite: faltan 5.000 km</div></div>
+  <div class="card radio" onclick="go('radio')">
+   <svg class="i" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8l10-5"/><circle cx="9" cy="14" r="2.5"/><path d="M15 12h3M15 16h3"/></svg>
+   <div class="big">Radio FM</div><div class="sub">Toca para abrir</div></div>
+  <div class="card bt"><div class="tag">BLUETOOTH</div>
+   <div class="ic" onclick="go('btmusic')"><svg class="i" viewBox="0 0 24 24"><path d="M7 7l10 10-5 5V2l5 5L7 17"/></svg></div>
+   <div class="s">Música Bluetooth</div><div class="a">Controles del reproductor</div>
+   <div class="ctl">
+    <button onclick="media(88)"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM20 6v12L9 12z"/></svg></button>
+    <button class="p" onclick="media(85)"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button onclick="media(87)"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM4 6v12l11-6z"/></svg></button></div></div>
+  <div class="card cp" onclick="go('carplay')"><div class="logo"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>CARPLAY</div>
+ </div>
+ <div class="bar">
+  <button onclick="go('nav')"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></button>
+  <button onclick="go('bt')"><svg class="i" viewBox="0 0 24 24"><path d="M7 7l10 10-5 5V2l5 5L7 17"/></svg></button>
+  <button onclick="go('radio')"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8l10-5"/><circle cx="9" cy="14" r="2.5"/><path d="M15 12h3M15 16h3"/></svg></button>
+  <button class="home" onclick="openApps()"><i></i></button>
+  <button onclick="document.body.classList.toggle('night')"><svg class="i" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  <button onclick="A&&A.wifi()"><svg class="i" viewBox="0 0 24 24"><path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></svg></button>
+  <button onclick="go('cfg')"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></button>
+ </div>
+ <div id="apps"><div class="top"><span>Todas las apps</span><button onclick="closeApps()">Cerrar</button></div><div class="ag" id="ag"></div></div>
+ <div id="toast"></div>
+</div>
+<script>
+// ====== CONFIGURACIÓN (edita aquí) ======
+const NAME='Jesus';
+const LAT=10.6317, LON=-71.6406, CITY='Maracaibo, Zulia';
+const APPS={nav:'com.waze',bt:'com.nwd.android.phone',radio:'com.nwd.radio',eq:'com.nwd.audioset',
+ cfg:'com.android.settings',carplay:'com.zjinnova.zlink',btmusic:'com.nwd.bt.music'};
+// ========================================
+const A=window.Android, $=id=>document.getElementById(id);
+function fit(){const w=document.documentElement.clientWidth||innerWidth,h=document.documentElement.clientHeight||innerHeight;
+ const k=parseFloat(localStorage.getItem('k')||'1');
+ document.documentElement.style.fontSize=(10*Math.min(w/1024,h/600)*k)+'px'}
+function cycleZoom(){let k=parseFloat(localStorage.getItem('k')||'1')-0.1;if(k<0.55)k=1;localStorage.setItem('k',k);fit();toast('Tamaño '+Math.round(k*100)+'%')}
+addEventListener('resize',fit);addEventListener('load',fit);fit();[200,800,2000].forEach(t=>setTimeout(fit,t));
+function toast(t){const e=$('toast');e.textContent=t;e.style.opacity=1;setTimeout(()=>e.style.opacity=0,2500)}
+function go(k){if(!A){toast('Solo funciona en la radio');return}if(!A.launch(APPS[k]))toast('No se pudo abrir '+APPS[k])}
+function media(k){if(A)A.media(k)}
+function openApps(){if(!A)return;const l=JSON.parse(A.apps());$('ag').innerHTML=l.map(a=>
+ '<button data-p="'+a.p+'"><b>'+(a.n[0]||'?').toUpperCase()+'</b>'+a.n+'</button>').join('');
+ document.querySelectorAll('#ag button').forEach(b=>b.onclick=()=>{A.launch(b.dataset.p);closeApps()});$('apps').classList.add('on')}
+function closeApps(){$('apps').classList.remove('on')}
+function setOil(){const v=prompt('¿Cuántos km faltan para el cambio de aceite?',localStorage.getItem('oil')||'5000');
+ if(v&&!isNaN(v)){localStorage.setItem('oil',v);showOil()}}
+function showOil(){const v=+(localStorage.getItem('oil')||5000);$('oil').textContent='Aceite: faltan '+v.toLocaleString('es')+' km'}
+function tick(){const d=new Date(),h=d.getHours();
+ $('clk').textContent=String(h).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+ $('dt').textContent=d.toLocaleDateString('es',{weekday:'long',day:'numeric',month:'long'});
+ $('hi').textContent='Hola, '+NAME;$('hi2').textContent=(h<12?'Buenos días':h<19?'Buenas tardes':'Buenas noches')+' · Bienvenido'}
+tick();showOil();setInterval(tick,10000);
+const CL='<path d="M14 34h20a8 8 0 0 0 1-15.9A11 11 0 0 0 14 21a7 7 0 0 0 0 13z" fill="#cfe3ff" stroke="none"/>';
+const SUN='<circle cx="24" cy="24" r="8" fill="#ffd54a" stroke="#ffd54a"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M11 37l4-4M33 15l4-4"/>';
+const IC={sun:SUN,cloud:CL,part:'<g transform="translate(8,-6) scale(.7)">'+SUN+'</g><g transform="translate(0,4)">'+CL+'</g>',
+ rain:'<g transform="translate(0,-4)">'+CL+'</g><path d="M16 38l-2 5M24 38l-2 5M32 38l-2 5"/>'};
+function wcode(c){if(c==0)return['Despejado','sun'];if(c<3)return['Parcialmente nublado','part'];if(c==3||c==45||c==48)return['Nublado','cloud'];
+ if(c<58)return['Llovizna','rain'];if(c<68||(c>=80&&c<83))return['Lluvia','rain'];if(c>=95)return['Tormenta','rain'];return['Nublado','cloud']}
+function drawWx(w){const[t,k]=wcode(w.c);
+ $('wi').innerHTML='<svg style="width:5.8rem;height:5.8rem" viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round">'+IC[k]+'</svg>';
+ $('wt').textContent=Math.round(w.t)+'°';$('ws').textContent=t+' · Sensación '+Math.round(w.a)+'°';
+ $('wmax').textContent='↑ '+Math.round(w.mx)+'°';$('wmin').textContent='↓ '+Math.round(w.mn)+'°';
+ $('whum').textContent=Math.round(w.h)+'%';$('wwind').textContent=Math.round(w.w)+' km/h';$('wd').textContent=CITY}
+async function wx(){try{const c=localStorage.getItem('wx');if(c)drawWx(JSON.parse(c))}catch(e){}
+ try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+LAT+'&longitude='+LON+
+ '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FCaracas');
+ const j=await r.json(),u=j.current;const w={t:u.temperature_2m,a:u.apparent_temperature,h:u.relative_humidity_2m,c:u.weather_code,w:u.wind_speed_10m,
+ mx:j.daily.temperature_2m_max[0],mn:j.daily.temperature_2m_min[0]};localStorage.setItem('wx',JSON.stringify(w));drawWx(w)}catch(e){}}
+wx();setInterval(wx,900000);
+</script>
+</body></html>
